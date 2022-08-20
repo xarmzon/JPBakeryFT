@@ -12,7 +12,9 @@ const Button = (props: IButton) => {
   const { className = "", link = false, children, ...rest } = props;
   return link ? (
     <Link href={link}>
-      <a className={`underline decoration-secondary-100 ${className}`}>
+      <a
+        className={`underline text-primary-100 decoration-primary-100 ${className}`}
+      >
         {children}
       </a>
     </Link>

@@ -13,7 +13,10 @@ type TLinks = {
 const links: TLinks = {
   admin: [],
   buyer: [],
-  noAuth: [{ text: "Login", url: "/auth/login" }],
+  noAuth: [
+    { text: "Login", url: "/auth/login" },
+    { text: "Register", url: "/auth/register" },
+  ],
 };
 
 const Navbar = () => {
