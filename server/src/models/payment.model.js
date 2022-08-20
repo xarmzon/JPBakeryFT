@@ -5,9 +5,9 @@ const PaymentSchema = new Schema(
   {
     orderId: {
       type: Schema.Type.ObjectId,
-      unique: true,
       ref: "users",
       required: true,
+      unique: true,
     },
 
     ref: {
