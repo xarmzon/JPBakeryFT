@@ -1,15 +1,19 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode } from "react";
+import PageHead from "../components/PageHead/PageHead";
 
-interface IAuthLayout{
-    children:ReactNode
+interface IAuthLayout {
+  children: ReactNode;
+  title: string;
 }
-const AuthLayout = ({children}:IAuthLayout) => {
+const AuthLayout = ({ children, title }: IAuthLayout) => {
   return (
-    <div className={`w-[95%] mx-auto max-w-2xl bg-primary text-white`}>
-
+    <>
+      <PageHead title={title} />
+      <div className={`w-[95%] mx-auto max-w-2xl bg-primary text-white`}>
         {children}
-    </div>
-  )
-}
+      </div>
+    </>
+  );
+};
 
-export default AuthLayout
+export default AuthLayout;

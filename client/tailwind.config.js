@@ -9,6 +9,9 @@ module.exports = {
       fontFamily: {
         poppins: ["poppins", "sans-serif"],
       },
+      backgroundImage: {
+        cake1: "url(/images/cake_1.jpg)",
+      },
       colors: {
         primary: {
           DEFAULT: "rgb(60,68,148)",

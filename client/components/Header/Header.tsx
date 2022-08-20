@@ -8,7 +8,7 @@ interface Header {
 const Header = () => {
   return (
     <header
-      className={`fixed top-0 left-0 right-0 h-14 shadow-sm bg-white/60 backdrop-[2px] flex items-center w-full`}
+      className={`z-[9999] fixed top-0 left-0 right-0 h-14 shadow-sm bg-white/20 backdrop-[2px] flex items-center w-full`}
     >
       <Logo />
     </header>

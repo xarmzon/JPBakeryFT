@@ -15,7 +15,7 @@ const LoginPage: NextPage = () => {
   //             dispatch({type: "ERROR", payload: {error:e.message}})
   //         }
   //   }
-  return <AuthLayout>LoginPage</AuthLayout>;
+  return <AuthLayout title="Login">LoginPage</AuthLayout>;
 };
 
 export default LoginPage;
