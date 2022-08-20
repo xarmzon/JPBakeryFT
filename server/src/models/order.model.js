@@ -5,25 +5,25 @@ const OrderSchema = new Schema(
   {
     cakename: {
       type: String,
-      require: true,
+      required: true,
       index: true,
       unique: true,
     },
 
     cakeColor: {
       type: String,
-      require: true,
+      required: true,
     },
 
     cakeSize: {
       type: String,
-      require: true,
+      required: true,
       enums: ["small", "medium", "large"],
     },
 
     deliveryDate: {
       type: Date,
-      require: true,
+      required: true,
     },
 
     userId: {
@@ -34,33 +34,19 @@ const OrderSchema = new Schema(
 
     qty: {
       type: Number,
-      require: true,
+      required: true,
     },
 
     price: {
       type: Number,
-      require: true,
+      required: true,
     },
 
     status: {
       type: String,
-      require: true,
+      required: true,
       default: "buyer",
       enum: ["pending", "approved", "rejected", "delivered"],
-    },
-
-    createdAt: {
-      type: Date,
-      index: true,
-      unique: true,
-      default: Date.now,
-    },
-
-    updateAt: {
-      type: Date,
-      index: true,
-      unique: true,
-      default: Date.now,
     },
   },
 

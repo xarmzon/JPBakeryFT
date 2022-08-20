@@ -1,41 +1,30 @@
 const { Schema, model } = require("mongoose");
-const id = new ObjectID();
+const Id = new ObjectId();
 
 const PaymentSchema = new Schema(
   {
     orderId: {
-      type: Schema.Type.order(_id),
+      type: Schema.Type.ObjectId,
       unique: true,
+      ref: "users",
+      required: true,
     },
 
     ref: {
       type: String,
+      required: true,
     },
 
     amount: {
       type: Number,
-      require: true,
+      required: true,
     },
 
     status: {
       type: String,
-      require: true,
+      required: true,
       default: "buyer",
       enum: ["unpaid", "paid"],
-    },
-
-    createdAt: {
-      type: Date,
-      index: true,
-      unique: true,
-      default: Date.now,
-    },
-
-    updateAt: {
-      type: Date,
-      index: true,
-      unique: true,
-      default: Date.now,
     },
   },
 

@@ -5,49 +5,35 @@ const UserSchema = new Schema(
   {
     username: {
       type: String,
-      require: true,
+      required: true,
       index: true,
       unique: true,
     },
 
     email: {
       type: String,
-      require: true,
+      required: true,
       unique: true,
     },
 
     password: {
       type: String,
-      require: true,
+      required: true,
     },
 
     address: {
       type: String,
-      require: true,
+      required: true,
     },
 
     role: {
       type: String,
-      require: true,
+      required: true,
       default: "buyer",
       enum: ["buyer", "admin"],
     },
     refreshToken: {
       type: String,
-    },
-
-    createdAt: {
-      type: Date,
-      index: true,
-      unique: true,
-      default: Date.now,
-    },
-
-    updateAt: {
-      type: Date,
-      index: true,
-      unique: true,
-      default: Date.now,
     },
   },
 
