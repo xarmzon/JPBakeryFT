@@ -6,7 +6,7 @@ const id = new ObjectID();
 // ORDER SCHEMA CREATION FOR ALL ORDER MODELS
 const OrderSchema = new Schema(
   {
-    cakename: {
+    cakeName: {
       type: String,
       required: true,
       index: true,
