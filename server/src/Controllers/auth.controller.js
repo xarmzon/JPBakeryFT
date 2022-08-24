@@ -1,8 +1,8 @@
 const { hashSync, compareSync } = require("bcryptjs");
 const jwt = require('jsonwebtoken')
 const UserModel = require("../Models/users.model");
-const {buildResponse, buildUser}= require('../Utils/index')
-const {APIError} = require('../Utils/apiError')
+const {buildResponse, buildUser}= require('../utils/index')
+const {APIError} = require('../utils/apiError')
 
 exports.register = async (req, res, next) => {
   try {
