@@ -1,0 +1,41 @@
+{
+  "name": "express-async-wrapper",
+  "version": "0.1.0",
+  "description": "Wrap async express routes so exceptions can be caught by middleware.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha '**/*.test.js'",
+    "watch-test": "npm test -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/danawoodman/express-async-wrapper"
+  },
+  "keywords": [
+    "express",
+    "connect",
+    "middleware",
+    "wrapper",
+    "wrap",
+    "async",
+    "await",
+    "promise",
+    "promises",
+    "async",
+    "await",
+    "exception",
+    "error",
+    "errors",
+    "error",
+    "handler",
+    "error",
+    "handling"
+  ],
+  "author": "Dana Woodman <dana@danawoodman.com> (http://danawoodman.com/)",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "3.5.0",
+    "chai-as-promised": "6.0.0",
+    "mocha": "3.2.0"
+  }
+}
