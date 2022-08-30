@@ -7,12 +7,12 @@ const PaymentSchema = new Schema(
   {
     orderId: {
       type: Schema.Type.ObjectId,
-      ref: "users",
+      ref: "orders",
       required: true,
     },
 
     ref: {
-      type: String,
+      type: String, ///JP-ORDER-20221706S14
       required: true,
     },
 
@@ -24,7 +24,7 @@ const PaymentSchema = new Schema(
     status: {
       type: String,
       required: true,
-      default: "buyer",
+      default: "unpaid",
       enum: ["unpaid", "paid"],
     },
   },
@@ -36,7 +36,7 @@ const PaymentSchema = new Schema(
 );
 
 // ASSIGNING SCHEMA ORDER MODELS TO 1 CONSTANT
-const PaymentModel = model("buyers", PaymentSchema);
+const PaymentModel = model("payment", PaymentSchema);
 
 // EXPORTING THE THE MODELS
 module.exports = PaymentModel;

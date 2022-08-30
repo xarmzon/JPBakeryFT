@@ -48,7 +48,8 @@ const createOrder = async(req, res, next) =>{
             deliveryDate,
             status
         })
-
+        //TODO: GENERATE PAYMENT REF
+       
         res.status(201).json({msg: "Order created successfully", order})
     } catch (error) {
         next(error)
