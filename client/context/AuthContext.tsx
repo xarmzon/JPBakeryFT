@@ -6,7 +6,7 @@ export type TUser = {
   email: string;
   password: string;
   address: string;
-  role: string;
+  role: "admin" | "buyer";
   refreshToken: string;
   createdAt: string;
   updatedAt: string;
