@@ -1,3 +1,4 @@
+
 const { verify, JsonWebTokenError} = require("jsonwebtoken");
 const { APIError } = require("../Utils/apiError");
 
@@ -23,21 +24,29 @@ const userRequired = async(req, res, next)=>{
   }
 };
 
-const adminRequired = async(req, res, next)=>{
-
+const adminRequired = (req, res, next) => {
   try {
-    const isAdmin = req.role ==="admin";
-    if(!isAdmin){
+    const { authorization } = req.headers;
+    if (!authorization)
       return next(APIError.unauthorized());
-    }
-
+    const token = authorization.token.split("")[1];
+    const payload = verify(token, process.env.JWT_SECRET_TOKEN);
+    if (!payload)
+      return next(APIError.customError("Token expired", 401));
+    if (payload.role.toLowerCase() !== "admin")
+      return next(APIError.unauthenticated());
+    req.body.id = payload.id;
+    req.body.role = payload.role;
     next();
   } catch (error) {
-    next(error)
+    next(error);
   }
-    
-} 
+};
   module.exports = {
     adminRequired,
     userRequired,
   }
+
+
+ 
+
