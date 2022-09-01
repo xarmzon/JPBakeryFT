@@ -1,4 +1,5 @@
 const OrderModel = require("../models/order.model");
+const PaymentModel = require("../models/payment.model");
 const UserModel = require("../models/users.model");
 const { priceCalc } = require("../services/priceCalculator.service");
 const { APIError } = require("../Utils/apiError");
@@ -34,8 +35,6 @@ const createOrder = async(req, res, next) =>{
 
     let price = priceCalc(cakeSize, qty);
     let status = "pending";
-    let deliveryDate = new Date();
-    deliveryDate.setDate(deliveryDate.getDate() + 1)
 
     try {
         const order = await OrderModel.create({
@@ -45,11 +44,12 @@ const createOrder = async(req, res, next) =>{
             qty,
             userId,
             price,
-            deliveryDate,
             status
         })
 
-        res.status(201).json({msg: "Order created successfully", order})
+        const ref = `JP-ORDER-${new Date().toISOString()}`
+        await PaymentModel.create({orderId: order._id, ref, amount: price, status: "unpaid"})
+        res.status(201).json({msg: "Order created successfully", order, ref})
     } catch (error) {
         next(error)
     }
