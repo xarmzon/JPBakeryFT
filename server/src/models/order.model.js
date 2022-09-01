@@ -25,12 +25,12 @@ const OrderSchema = new Schema(
 
     deliveryDate: {
       type: Date,
-      required: true,
+      // required: true,
     },
 
     userId: {
       type: Schema.Types.ObjectId,
-      ref: "account",
+      ref: "users",
       required: true,
     },
 
@@ -47,7 +47,7 @@ const OrderSchema = new Schema(
     status: {
       type: String,
       required: true,
-      default: "buyer",
+      default: "pending",
       enum: ["pending", "approved", "rejected", "delivered"],
     },
   },
@@ -60,7 +60,7 @@ const OrderSchema = new Schema(
 );
 
 // ASSIGNING SCHEMA ORDER MODELS TO 1 CONSTANT
-const OrderModel = model("buyer", OrderSchema);
+const OrderModel = model("orders", OrderSchema);
 
 // EXPORTING THE THE MODELS
 module.exports = OrderModel;
