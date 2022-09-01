@@ -10,7 +10,6 @@ orderRouter.delete("/", userRequired, deleteOrder)
 orderRouter.put("/", userRequired, updateOrder),
 orderRouter.put("/status", userRequired, adminRequired, updateOrderStatus);
 
-
 module.exports ={
     orderRouter
 }
