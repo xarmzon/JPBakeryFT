@@ -2,11 +2,14 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const { config } = require("./config");
+const cookieParser = require('cookie-parser')
 
 const app = express();
 
+
 app.use(morgan("dev"));
 app.use(cors());
+app.use(cookieParser())
 
 app.use("/api", (req, res) => {
   res.send({
