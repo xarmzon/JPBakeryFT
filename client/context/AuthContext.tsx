@@ -64,7 +64,6 @@ const authReducer = (state: TAuthState, action: TAction): TAuthState => {
     case "ERROR":
       return {
         ...state,
-        isLoading: false,
         error: action.payload.error || "",
       };
 
