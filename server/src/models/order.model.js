@@ -1,7 +1,6 @@
 // Importing desstructing mongoose from installed mongoose
 
 const { Schema, model } = require("mongoose");
-const id = new ObjectID();
 
 // ORDER SCHEMA CREATION FOR ALL ORDER MODELS
 const OrderSchema = new Schema(
@@ -9,7 +8,7 @@ const OrderSchema = new Schema(
     cakeName: {
       type: String,
       required: true,
-      index: true,
+      index: "text",
     },
 
     cakeColor: {
@@ -30,7 +29,7 @@ const OrderSchema = new Schema(
 
     userId: {
       type: Schema.Types.ObjectId,
-      ref: "users",
+      ref: "User",
       required: true,
     },
 
@@ -60,7 +59,7 @@ const OrderSchema = new Schema(
 );
 
 // ASSIGNING SCHEMA ORDER MODELS TO 1 CONSTANT
-const OrderModel = model("orders", OrderSchema);
+const OrderModel = model("Order", OrderSchema);
 
 // EXPORTING THE THE MODELS
 module.exports = OrderModel;

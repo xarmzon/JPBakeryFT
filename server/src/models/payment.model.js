@@ -1,13 +1,12 @@
 // Importing desstructing mongoose from installed mongoose
 const { Schema, model } = require("mongoose");
-const Id = new ObjectId();
 
 // ORDER SCHEMA CREATION FOR ALL ORDER MODELS
 const PaymentSchema = new Schema(
   {
     orderId: {
-      type: Schema.Type.ObjectId,
-      ref: "orders",
+      type: Schema.Types.ObjectId,
+      ref: "Order",
       required: true,
     },
 
@@ -36,7 +35,7 @@ const PaymentSchema = new Schema(
 );
 
 // ASSIGNING SCHEMA ORDER MODELS TO 1 CONSTANT
-const PaymentModel = model("payment", PaymentSchema);
+const PaymentModel = model("Payment", PaymentSchema);
 
 // EXPORTING THE THE MODELS
 module.exports = PaymentModel;

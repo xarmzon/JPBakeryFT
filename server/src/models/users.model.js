@@ -2,8 +2,6 @@
 
 const { Schema, model } = require("mongoose");
 
-const id = new ObjectID();
-
 // ORDER SCHEMA CREATION FOR ALL ORDER MODELS
 const UserSchema = new Schema(
   {
@@ -49,7 +47,7 @@ const UserSchema = new Schema(
 );
 
 // ASSIGNING SCHEMA ORDER MODELS TO 1 CONSTANT
-const UserModel = model("users", UserSchema);
+const UserModel = model("User", UserSchema);
 
 // EXPORTING THE THE MODELS
 module.exports = UserModel;
