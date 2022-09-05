@@ -28,7 +28,11 @@ const useAuth = () => {
           },
         });
         const data = await resp.json();
-        dispatch({ type: "LOGIN", payload: { user: data } });
+        if (resp.ok) {
+          dispatch({ type: "LOGIN", payload: { user: data } });
+        } else {
+          throw new Error(data.msg || resp.statusText);
+        }
       } catch (error) {
         const err = error as any;
         dispatch({

@@ -39,11 +39,11 @@ exports.register = async (req, res, next) => {
 
 exports.login = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
-    const user = await UserModel.findOne({ email });
+    const { username, password } = req.body;
+    const user = await UserModel.findOne({ username });
     if (!user) {
       return next(
-        APIError.notFound("Sorry, No Account with that email or password")
+        APIError.notFound("Sorry, No Account with that username or password")
       );
     }
     if (!password) {

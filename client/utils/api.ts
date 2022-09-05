@@ -5,7 +5,7 @@ type TApiProps = {
   options?: RequestInit;
 };
 
-const base = "http://localhost:8000/api";
+const base = "http://localhost:8000";
 
 export const api = async ({ path, method, data, options }: TApiProps) => {
   const url = base + path;
