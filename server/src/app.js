@@ -19,4 +19,10 @@ app.use("/api", (req, res) => {
   });
 });
 
+app.use((err, req, res, next) => {
+  res
+    .status(err.status || 500)
+    .json({ error: true, msg: err.message || "Internal Server Error" });
+});
+
 module.exports = app;

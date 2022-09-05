@@ -1,6 +1,6 @@
 const { hashSync, compareSync } = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const UserModel = require("../Models/users.model");
+const UserModel = require("../models/users.model");
 const { buildResponse, buildUser } = require("../utils/index");
 const { APIError } = require("../utils/apiError");
 
