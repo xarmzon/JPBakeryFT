@@ -5,6 +5,19 @@
 
 
 ###
+POST {{authRoute}}/register 
+Content-Type: application/json
+Accept: appl/application/json
+
+{
+    "username": "rasta",
+    "password": "pass",
+    "address": "my address",
+    "email": "myemailw@mail.com"
+}
+
+
+###
 POST {{authRoute}}/login HTTP/1.1
 Content-Type: application/json
 Accept: application/json
@@ -16,6 +29,12 @@ Accept: application/json
 
 
 ###
-@token =eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTY3ZGQ3ZmMzNzE4MzE1M2U4MDRjNyIsInJvbGUiOiJidXllciIsImlhdCI6MTY2MjQyNTQ0MiwiZXhwIjoxNjYyNDI3MjQyfQ.iCl8xvnyiRpBNiqHEtCMCbJJ5UoJgDqQ_LA76XlMg-E
+@token =eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTdhNWQ1ZTVhMWY0ZTRiYTdiZTE3MiIsInJvbGUiOiJidXllciIsImlhdCI6MTY2MjQ5NDQ1NiwiZXhwIjoxNjYyNDk0NTE2fQ.HRsmsU-M8TRSxZh-2gYAxXuK1rDYgnNNb_4gVe4ETAI
 POST {{authRoute}}/refreshToken
+
+
+
+
+###
+POST {{authRoute}}/logout
 Authorization: Bearer {{token}}

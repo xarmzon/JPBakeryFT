@@ -11,6 +11,6 @@ const { userRequired } = require("../middleware/auth.middleware");
 authRouter.post("/register", register);
 authRouter.post("/login", login);
 authRouter.post("/logout", userRequired, logout);
-authRouter.post("/refreshToken", userRequired, refreshToken);
+authRouter.post("/refreshToken", refreshToken);
 
 module.exports = authRouter;
