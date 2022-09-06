@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import useAuth from "../../hooks/useAuth";
 import Button from "../Button/Button";
 
 interface ILink {
@@ -20,23 +21,23 @@ const links: TLinks = {
 };
 
 const Navbar = () => {
-  const { state: auth } = useContext(AuthContext);
-  const performLogout = () => {};
+  const { isLoading, user, logout } = useAuth();
+
   return (
     <nav className="flex items-center gap-5">
-      {!auth.isLoading && !auth.user && (
+      {!isLoading && !user && (
         <>
           {links.noAuth.map((link) => (
             <Button link={link.url}>{link.text}</Button>
           ))}
         </>
       )}
-      {!auth.isLoading && auth.user && (
+      {!isLoading && user && (
         <>
-          {links[auth.user.role].map((link) => {
-            <Button link={link.url}>{link.text}</Button>;
-          })}
-          <Button onClick={performLogout}>Logout</Button>;
+          {links[user.role].map((link) => (
+            <Button link={link.url}>{link.text}</Button>
+          ))}
+          <Button onClick={logout}>Logout</Button>
         </>
       )}
     </nav>

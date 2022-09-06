@@ -71,9 +71,9 @@ exports.login = async (req, res, next) => {
     const data = buildUser(user.toObject());
 
     res.cookie("jwt", refreshToken, {
-      httpOnly: true,
-      sameSite: "none",
-      secure: true,
+      httpOnly: false,
+      // sameSite: "none",
+      // secure: true,
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
     res

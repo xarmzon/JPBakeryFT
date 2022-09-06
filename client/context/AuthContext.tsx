@@ -7,6 +7,7 @@ export type TUser = {
   password: string;
   address: string;
   role: "admin" | "buyer";
+  token: string;
   refreshToken: string;
   createdAt: string;
   updatedAt: string;
@@ -31,7 +32,7 @@ type TAction = TActionWithoutPayload & TActionWithPayload;
 const initialState: TAuthState = {
   loggedIn: false,
   user: null,
-  isLoading: false,
+  isLoading: true,
   error: "",
 };
 type TContextProps = {
@@ -49,11 +50,13 @@ const authReducer = (state: TAuthState, action: TAction): TAuthState => {
       return {
         ...state,
         user: action.payload.user,
+        loggedIn: action.payload.loggedIn || false,
       };
     case "LOGOUT":
       return {
         ...state,
         user: null,
+        loggedIn: false,
       };
     case "LOADING":
       return {

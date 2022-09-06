@@ -1,13 +1,17 @@
 import { NextPage } from "next";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { ChangeEvent, FormEvent, useContext, useState } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import Error from "../../components/Error/Error";
+import Loader from "../../components/Loader/Loader";
+import { AuthContext, TUser } from "../../context/AuthContext";
 import useAuth from "../../hooks/useAuth";
 import AuthLayout from "../../layout/AuthLayout";
 
 const LoginPage: NextPage = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-
+  const router = useRouter();
   const { login, isLoading, error: err, dispatch } = useAuth();
   const doLogin = (e: FormEvent) => {
     e.preventDefault();
@@ -15,9 +19,11 @@ const LoginPage: NextPage = () => {
       alert("Please fill your form properly");
       return;
     }
-    login({ username, password });
+    login({ username, password }, (role) => {
+      console.log(role);
+      alert("Login successfully");
+    });
   };
-  console.log(err);
 
   const update = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch({ type: "ERROR", payload: { error: "" } });
@@ -32,12 +38,8 @@ const LoginPage: NextPage = () => {
 
   return (
     <AuthLayout title="Login">
-      {isLoading && (
-        <div className="fixed z-[5] cursor-progress flex justify-center items-center inset-0 w-full h-full bg-primary/20 backdrop-blur-sm text-white font-bold text-xl">
-          Loading...
-        </div>
-      )}
-      {err && <p className="bg-red-600 text-red-200 text-sm p-2 mb-2">{err}</p>}
+      {isLoading && <Loader />}
+      {err && <Error text={err} />}
       <form
         onSubmit={doLogin}
         className="flex flex-col space-y-8 w-full relative"
@@ -49,7 +51,7 @@ const LoginPage: NextPage = () => {
           className="text-white placeholder:text-slate-100 w-full p-3 focus:outline-none bg-transparent border rounded focus:border-primary/50 border-white/50"
           type="text"
           disabled={isLoading}
-          placeholder="Enter your username"
+          placeholder="Enter your Username"
         />
         <input
           onChange={update}
@@ -66,6 +68,11 @@ const LoginPage: NextPage = () => {
           value="Login"
           disabled={isLoading}
         />
+        <div className="text-center !mt-2">
+          <Link href="/auth/register">
+            <a className="text-white hover:text-primary">Register Here</a>
+          </Link>
+        </div>
       </form>
     </AuthLayout>
   );

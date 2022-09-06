@@ -1,0 +1,21 @@
+@baseUrl = http://localhost:8000
+
+@authRoute = {{baseUrl}}/auth
+@otherRoute = {{baseUrl}}/orders
+
+
+###
+POST {{authRoute}}/login HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+
+{
+    "username": "rasta",
+    "password": "pass"
+}
+
+
+###
+@token =eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTY3ZGQ3ZmMzNzE4MzE1M2U4MDRjNyIsInJvbGUiOiJidXllciIsImlhdCI6MTY2MjQyNTQ0MiwiZXhwIjoxNjYyNDI3MjQyfQ.iCl8xvnyiRpBNiqHEtCMCbJJ5UoJgDqQ_LA76XlMg-E
+POST {{authRoute}}/refreshToken
+Authorization: Bearer {{token}}

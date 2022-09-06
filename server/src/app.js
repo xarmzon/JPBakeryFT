@@ -8,7 +8,7 @@ const router = require("./routes");
 
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(cors());
 app.use(cookieParser());
@@ -23,7 +23,11 @@ app.use("/api", (req, res) => {
 app.use((err, req, res, next) => {
   res
     .status(err.status || 500)
-    .json({ error: true, msg: err.message || "Internal Server Error" });
+    .json({
+      error: true,
+      msg: err.message || "Internal Server Error",
+      stack: process.env.NODE_ENV === "production" ? err.stack : undefined,
+    });
 });
 
 module.exports = app;
