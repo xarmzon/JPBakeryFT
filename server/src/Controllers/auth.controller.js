@@ -6,8 +6,8 @@ const { APIError } = require("../utils/apiError");
 
 exports.register = async (req, res, next) => {
   try {
-    const { username, password, role, email, address } = req.body;
-    if (!email || !password || !role || !username || !address) {
+    const { username, password, role = "buyer", email, address } = req.body;
+    if (!email || !password || !username || !address) {
       return next(APIError.badRequest(`Field(s) missing. Please try again`));
     }
 
@@ -57,12 +57,19 @@ exports.login = async (req, res, next) => {
         APIError.customError("Sorry, Invalid password for this user", 400)
       );
     }
-
+    if (user.refreshToken) {
+      return next(
+        APIError.customError(
+          "There is already an active session using your account",
+          400
+        )
+      );
+    }
     const accessSecret = process.env.JWT_SECRET_TOKEN;
     const refreshSecret = process.env.JWT_REFRESH_TOKEN;
     const payload = { id: user._id, role: user.role };
 
-    const token = jwt.sign(payload, accessSecret, { expiresIn: "30m" });
+    const token = jwt.sign(payload, accessSecret, { expiresIn: "1m" });
     const refreshToken = jwt.sign(payload, refreshSecret, { expiresIn: "7d" });
 
     user.refreshToken = refreshToken;
@@ -107,7 +114,7 @@ exports.refreshToken = async (req, res, next) => {
       return next(APIError.customError(`Forbidden`, 403));
     const payload = { id: user._id, role: user.role };
     const accessSecret = process.env.JWT_SECRET_TOKEN;
-    const token = jwt.sign(payload, accessSecret, { expiresIn: "30m" });
+    const token = jwt.sign(payload, accessSecret, { expiresIn: "1m" });
     res.json({ token });
   } catch (err) {
     next(err);
@@ -118,16 +125,16 @@ exports.logout = async (req, res, next) => {
   try {
     const cookies = req.cookies;
     if (!cookies?.jwt) {
-      return next(APIError.customError(`No content, success`, 204));
+      return next(APIError.customError(`No valid cookie`, 400));
     }
     const refreshToken = cookies.jwt;
     const user = await UserModel.findOne({ refreshToken });
-
+    console.log(user);
     if (!user) {
       res.clearCookie("jwt", {
-        httpOnly: true,
-        sameSite: "none",
-        secure: true,
+        httpOnly: false,
+        // sameSite: "none",
+        // secure: true,
       });
       return res.sendStatus(204);
     }

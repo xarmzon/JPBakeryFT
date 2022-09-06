@@ -29,7 +29,7 @@ const createOrder = async (req, res, next) => {
 
   let price = priceCalc(cakeSize, qty);
   let status = "pending";
-
+  //todo: check whether the userId is valid
   try {
     const order = await OrderModel.create({
       cakeName,
@@ -213,12 +213,10 @@ const updateOrderStatus = async (req, res, next) => {
 
     order.status = status;
     await order.save();
-    res
-      .status(201)
-      .json({
-        msg: `The status of Order with id: ${id} has been updated`,
-        order,
-      });
+    res.status(201).json({
+      msg: `The status of Order with id: ${id} has been updated`,
+      order,
+    });
   } catch (error) {
     next(error);
   }
