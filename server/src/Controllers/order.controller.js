@@ -35,6 +35,8 @@ const createOrder = async(req, res, next) =>{
         const ref = `JP-ORDER-${new Date().toISOString()}`
         await PaymentModel.create({orderId: order._id, ref, amount: price, status: "unpaid"})
         res.status(201).json({msg: "Order created successfully", order, ref})
+=======
+
     } catch (error) {
         next(error)
     }
