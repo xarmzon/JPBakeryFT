@@ -13,24 +13,8 @@ const createOrder = async(req, res, next) =>{
         qty  
     } = req.body;
 
-    if(!cakeName){
-        return next(APIError.badRequest("Please supply cake name"))
-    }
-
-    if(!cakeColor){
-        return next(APIError.badRequest("Please supply cake color"))
-    }
-
-    if(!cakeSize){
-        return next(APIError.badRequest("Please supply cake size"))
-    }
-
-    if(!qty){
-        return next(APIError.badRequest("Please supply cake quantity"))
-    }
-
-    if(!userId){
-        return next(APIError.badRequest("Please supply user ID"))
+    if(!(cakeName && cakeColor && cakeSize && userId && qty)){
+        return next(APIError.badRequest("Please supply all the missing fields"))
     }
 
     let price = priceCalc(cakeSize, qty);
@@ -46,6 +30,7 @@ const createOrder = async(req, res, next) =>{
             price,
             status
         })
+
 
         const ref = `JP-ORDER-${new Date().toISOString()}`
         await PaymentModel.create({orderId: order._id, ref, amount: price, status: "unpaid"})
