@@ -10,26 +10,14 @@ const createUser = async(req, res, next) =>{
         role  
     } = req.body;
 
-    if(!username){
-        return next(APIError.badRequest("Please supply user name"))
+    if(!(username || password || address || role)){
+        return next(APIError.badRequest("Please supply all the required fields"))
     }
 
-    if(!email){
-        return next(APIError.badRequest("Please supply user email"))
-    }
-
-    if(!password){
-        return next(APIError.badRequest("Please supply user password"))
-    }
-
-    if(!address){
-        return next(APIError.badRequest("Please supply your address"))
-    }
-
-    if(!role){
-        return next(APIError.badRequest("Please supply user role"))
-    }
-
+    let   user = await UserModel.findById(id);
+        if(user){
+            return next(APIError.badRequest("user with the supplied ID already exist"))
+        }
 
     try {
         const user = await UserModel.create({
